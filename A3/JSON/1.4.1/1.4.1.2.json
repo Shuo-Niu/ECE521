@@ -1,0 +1,30 @@
+{
+    "mode": "Train",
+
+    "exp_name": "1.4.1.2",
+    "dataset": "notMNIST_10",
+
+    "num_iter": 3000000,
+    "train_batch_size": 100,
+
+    "learning_rate": 0.0053,
+    "weight_decay": 0.0003,
+
+    "adam": false,
+
+    "max_to_keep": 5,
+
+    "validation_interval": 50,
+
+    "gpu": false,
+
+
+    "num_hidden_layer": 2,
+    "hidden1_size": 328,
+    "hidden2_size": 159,
+
+    "dropout_rate": 0.5,
+
+    "checkpoint": "-",
+    "idx_unit_hidden1_visualization": 1
+}
