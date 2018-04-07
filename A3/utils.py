@@ -4,6 +4,7 @@ import os
 import argparse
 import tensorflow as tf
 import matplotlib.pyplot as plt
+import matplotlib.gridspec as gridspec
 import numpy as np
 
 def get_args():
@@ -45,12 +46,28 @@ def process_config(json_file):
     config.plot_dir = os.path.join("experiments", config.exp_name, "plot")
     return config
 
-def visualize_layer1(sess, idx_unit, checkpoint_name):
+def visualize_layer1(sess, exp_name, checkpoint_name):
     var_hidden1 = [v for v in tf.trainable_variables() if v.name == "hidden1/kernel:0"][0]
-    weight_hidden1= sess.run(var_hidden1)
-    weight_selected = weight_hidden1[:,idx_unit-1]
-    weight_selected = weight_selected.reshape([28, 28])
-    plt.imshow(weight_selected)
-    #plt.show()
-    plt.savefig('visulization_unit'+ str(idx_unit)+ '-'+ checkpoint_name +'.png')
+    weight_hidden1= sess.run(var_hidden1) # shape=(784, 1000)
+    # create grid
+    _y = 25
+    _x = 40
+    fig = plt.figure(figsize = (_y,_x))
+    gs = gridspec.GridSpec(_y,_x)
+    gs.update(wspace=0.05, hspace=0.05)
+    for y in xrange(_y):
+        for x in xrange(_x):
+            weight_selected = weight_hidden1[:,y*_x+x]
+            weight_selected = weight_selected.reshape([28, 28])
+            ax = fig.add_subplot(gs[y*_x+x])
+            ax.imshow(weight_selected)
+            ax.axis('off')
+            # plt.imshow(weight_selected)
+    plt.tight_layout()
+    plt.show()
+    # weight_selected = weight_hidden1[:,idx_unit-1]
+    # weight_selected = weight_selected.reshape([28, 28])
+    # plt.imshow(weight_selected)
+    # plt.show()
+    # plt.savefig(exp_name +'.png')
 

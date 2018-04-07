@@ -43,7 +43,7 @@ def main():
         test_loss, test_acc = evaluate(sess, data, model, 'test', config)
         print("Test Loss: %f, Test Accuracy: %f" % (test_loss, test_acc))
 
-        visualize_layer1(sess, config.idx_unit_hidden1_visualization,name_checkpoint)
+        visualize_layer1(sess, config.exp_name, name_checkpoint)
 
 
 

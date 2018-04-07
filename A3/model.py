@@ -22,7 +22,8 @@ class BaseModel(object):
             else:
                 print("Model loaded fail")
         else:
-            selected_checkpoint = os.path.join(self.config.checkpoint_dir,file_name)
+            # selected_checkpoint = os.path.join(self.config.checkpoint_dir,file_name)
+            selected_checkpoint = os.path.join(file_name)
             print("Loading model checkpoint {} ... \n".format(selected_checkpoint))
             self.saver.restore(sess, selected_checkpoint)
             print("Model loaded")
